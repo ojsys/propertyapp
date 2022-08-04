@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block mainpanel %}
+
+{% if success %}
+     <div class="alert alert-success">Tenant Added Successfully</div>
+    <a href="{% url 'rent_roll' %}" class="btn btn-dark">Go to Dashboard</a>
+{% else %}
+    <div class="alert alert-danger">Something went wrong. Please try again</div>
+    <a href="{% url 'rent_roll' %}" class="btn btn-dark">Go Back</a>
+{% endif %}
+
+{% endblock mainpanel %}

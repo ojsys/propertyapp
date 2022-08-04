@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block mainpanel %}
+
+<a href="" class="btn btn-primary btn-xl mb-5" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fas fa-user-plus fa-lg"></i>&nbsp;&nbsp; Add Property Information</a>
+
+{% if property_info %}
+
+<div class="row">
+  {% for info in property_info %}
+  <div class="card mb-3" >
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{{ info.property_images.url }}" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body mt-5">
+            <h2 class="card-title">Property Name: </h2>
+            <p class="card-text">{{ info.property_name }}</p>
+            <h3 class="card-title">Property Type: </h3>
+            <p class="card-text">{{ info.property_type }}</p>
+            <h3 class="card-title">Property Location: </h3>
+            <p class="card-text">{{ info.property_location }}</p>
+            <h3 class="card-title">Property Owner: </h3>
+            <p class="card-text">{{ info.property_owner }}</p>
+            <h3 class="card-title">Propety Description: </h3>
+            <p class="card-text">{{ info.property_description }}</p>
+            
+          </div>
+        </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+{% endif %}
+
+<!-- Add Records Modal -->
+<div class="modal" tabindex="-1" id="myModal" aria-labelledby="modal-title" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-title">Add Property Information </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          {% if success %}
+          <div class="alert alert-success alert-dismissible fade show d-none">Property Added Successfully!</div>
+          {% else %}
+             <form action="{% url 'property_info' %}" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                  <div class="form-group mt-5">
+                      <input type="submit" value="Submit" class="btn btn-primary" />
+                  </div>
+            </form>
+          {% endif %}
+        
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock mainpanel %}

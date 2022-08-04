@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block mainpanel %}
+
+{% if success %}
+     <div class="alert alert-success">Property Added Successfully</div>
+    <a href="{% url 'property_info_roll' %}" class="btn btn-dark">Go Back</a>
+{% else %}
+    <div class="alert alert-danger">Something went wrong. Please try again</div>
+    <a href="{% url 'property_info_roll' %}" class="btn btn-dark">Go Back</a>
+{% endif %}
+
+{% endblock mainpanel %}

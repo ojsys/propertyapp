@@ -1,0 +1,309 @@
+{% extends "base.html" %}
+
+{% block nav %}
+
+
+{% endblock nav %}
+
+{% block mainpanel %}
+<div class="home-tab">
+  <div class="d-sm-flex align-items-center justify-content-between border-bottom">
+    
+    <!-- <div>
+      <div class="btn-wrapper">
+        <a href="#" class="btn btn-otline-dark align-items-center"><i class="icon-share"></i> Share</a>
+        <a href="#" class="btn btn-otline-dark"><i class="icon-printer"></i> Print</a>
+        <a href="#" class="btn btn-primary text-white me-0"><i class="icon-download"></i> Export</a>
+      </div>
+    </div> -->
+  </div>
+  <div class="tab-content tab-content-basic">
+    <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
+      <div class="row">
+        <div class="col-lg-8 d-flex flex-column">
+          <div class="row flex-grow">
+            <div class="col-12 col-lg-4 col-lg-12 grid-margin stretch-card">
+              <div class="card card-rounded">
+                <div class="card-body">
+                  <div class="d-sm-flex justify-content-between align-items-start">
+                    <div>
+                     <h4 class="card-title card-title-dash">Rent Roll</h4>
+                     <h5 class="card-subtitle card-subtitle-dash">List of our latest Tenants</h5>
+                    </div>
+                  </div>
+                  <p class="card-text">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tenant Name</th>
+                                    <th scope="col">Phone No.</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Property Rented</th>
+                                    <th scope="col">Location</th>
+                                    <th scope="col">Rent Rate</th>
+                                    <th scope="col">Due Date</th>
+                                    <th scope="col">Gender</th>
+                                    <th scope="col">Owner</th>
+                                    <th scope="col">Date Created</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for rent in rents %}
+                                <tr>
+                                    <td>{{ rent.name }}</td>
+                                    <td>{{ rent.phone }}</td>
+                                    <td>{{ rent.email }}</td>
+                                    <td>{{ rent.property_type }}</td>
+                                    <td>{{ rent.location }}</td>
+                                    <td>{{ rent.rent_rate }}</td>
+                                    <td>{{ rent.due_date }}</td>
+                                    <td>{{ rent.gender }}</td>
+                                    <td>{{ rent.owner }}</td>
+                                    <td>{{ rent.created_at }}</td>
+                                    <td>Actions</td>
+
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 d-flex flex-column">
+          <div class="row flex-grow">
+            <div class="col-md-6 col-lg-12 grid-margin stretch-card">
+              <div class="card bg-primary card-rounded">
+                <div class="card-body pb-0">
+                  <h4 class="card-title card-title-dash text-white mb-4">Status Summary</h4>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <p class="status-summary-ight-white mb-1 fs-5">Revenue</p>
+                      <h2 class="text-info fs-1">{{revenue.totalrev}}</h2>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--<div class="col-md-6 col-lg-12 grid-margin stretch-card">
+              <div class="card card-rounded">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="d-flex justify-content-between align-items-center mb-2 mb-sm-0">
+                        <div class="circle-progress-width">
+                          <div id="totalVisitors" class="progressbar-js-circle pr-2"></div>
+                        </div>
+                        <div>
+                          <p class="text-small mb-2">Total Visitors</p>
+                          <h4 class="mb-0 fw-bold">26.80%</h4>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="circle-progress-width">
+                          <div id="visitperday" class="progressbar-js-circle pr-2"></div>
+                        </div>
+                        <div>
+                          <p class="text-small mb-2">Visits per day</p>
+                          <h4 class="mb-0 fw-bold">9065</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>-->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 d-flex flex-column">
+          <div class="row flex-grow">
+            <div class="col-12 grid-margin stretch-card">
+              <div class="card card-rounded">
+                <div class="card-body">
+                  <div class="d-sm-flex justify-content-between align-items-start">
+                    <div>
+                      <h4 class="card-title card-title-dash">Financials</h4>
+                     <p class="card-subtitle card-subtitle-dash"><hr> </p>
+                    </div>
+                    
+                  </div>
+                  <div class="d-sm-flex align-items-center mt-1 justify-content-between">
+                    <div class="d-sm-flex align-items-center mt-4 justify-content-between"><h3 class="me-2 fw-bold">Income & Expenses Overview</h3></div>
+                    <div class="me-3"><div id="marketing-overview-legend"></div></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class=" mt-3">
+                        <canvas id="myChart2" width="400" height="200"></canvas>
+                        <script>
+                        var ctx = document.getElementById('myChart2').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: [{% for data in data %} '{{data.payment_date}}', {% endfor %}],
+                                datasets: [{
+                                    label: 'Income',
+                                    data: [{% for data in data %} {{data.payment_amount}},{% endfor %}],
+                                    backgroundColor: [
+                                        '#0D6EFD',
+                                        
+                                    ],
+                                    borderColor: [
+                                        '#0D6EFD',
+                                        
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                        </script>
+                        
+                        <!-- <canvas id="marketingOverview"></canvas> -->
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class=" mt-3">
+                        <canvas id="myChart" width="400" height="200"></canvas>
+                        <script>
+                        var ctx = document.getElementById('myChart').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: [{% for data in data2 %} '{{data.payment_date}}', {% endfor %}],
+                                datasets: [{
+                                    label: 'Expenses',
+                                    data: [{% for data in data2 %} {{data.payment_amount}},{% endfor %}],
+                                    backgroundColor: [
+                                        '#a8a8a8',
+                                        
+                                    ],
+                                    borderColor: [
+                                        '#a8a8a8',
+                                        
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                        </script>
+                        
+                        <!-- <canvas id="marketingOverview"></canvas> -->
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          
+         
+          
+        </div>
+        <div class="col-lg-4 d-flex flex-column">
+          <div class="row flex-grow">
+            <div class="col-12 grid-margin stretch-card">
+              <div class="card card-rounded">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="card-title card-title-dash">Task list</h4>
+                        <div class="add-items d-flex mb-0">
+                          <!-- <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?"> -->
+                          <button class="add btn btn-icons btn-rounded btn-primary todo-list-add-btn text-white me-0 pl-12p"><i class="mdi mdi-plus"></i></button>
+                        </div>
+                      </div>
+                      <div class="list-wrapper">
+                        <ul class="todo-list todo-list-rounded">
+                          <li class="d-block">
+                            <div class="form-check w-100">
+                              <label class="form-check-label">
+                                <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the printing <i class="input-helper rounded"></i>
+                              </label>
+                              <div class="d-flex mt-2">
+                                <div class="ps-4 text-small me-3">24 June 2020</div>
+                                <div class="badge badge-opacity-warning me-3">Due tomorrow</div>
+                                <i class="mdi mdi-flag ms-2 flag-color"></i>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="d-block">
+                            <div class="form-check w-100">
+                              <label class="form-check-label">
+                                <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the printing <i class="input-helper rounded"></i>
+                              </label>
+                              <div class="d-flex mt-2">
+                                <div class="ps-4 text-small me-3">23 June 2020</div>
+                                <div class="badge badge-opacity-success me-3">Done</div>
+                              </div>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="form-check w-100">
+                              <label class="form-check-label">
+                                <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the printing <i class="input-helper rounded"></i>
+                              </label>
+                              <div class="d-flex mt-2">
+                                <div class="ps-4 text-small me-3">24 June 2020</div>
+                                <div class="badge badge-opacity-success me-3">Done</div>
+                              </div>
+                            </div>
+                          </li>
+                          <li class="border-bottom-0">
+                            <div class="form-check w-100">
+                              <label class="form-check-label">
+                                <input class="checkbox" type="checkbox"> Lorem Ipsum is simply dummy text of the printing <i class="input-helper rounded"></i>
+                              </label>
+                              <div class="d-flex mt-2">
+                                <div class="ps-4 text-small me-3">24 June 2020</div>
+                                <div class="badge badge-opacity-danger me-3">Expired</div>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock mainpanel %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block mainpanel %}
+
+{% if success %}
+     <div class="alert alert-success">Income Added Successfully</div>
+    <a href="{% url 'financials' %}" class="btn btn-dark">Go Back</a>
+{% else %}
+    <div class="alert alert-danger">Something went wrong. Please try again</div>
+    <a href="{% url 'financials' %}" class="btn btn-dark">Go Back</a>
+{% endif %}
+
+{% endblock mainpanel %}

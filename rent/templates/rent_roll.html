@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+<!-- Render the Table for Rent -->
+{% block mainpanel %}
+
+    <div class="container">
+        <h3 class="mt-4 mb-5">All Tenants</h3>
+        <a href="" class="btn btn-primary btn-xl mb-5" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fas fa-user-plus fa-lg"></i>&nbsp;&nbsp; Add Tenant</a>
+        <div class="row">
+            <div class="col-md-12">
+                {% if rents %}
+                <div class="card bg-light ms-4 me-4 mb-4">
+                    <div class="card-header">
+                        <i class="fa fa-list fa-lg"></i> Tenants Records
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Tenant Name</th>
+                                            <th scope="col">Phone No.</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Property Rented</th>
+                                            <th scope="col">Location</th>
+                                            <th scope="col">Rent Rate</th>
+                                            <th scope="col">Due Date</th>
+                                            <th scope="col">Gender</th>
+                                            <th scope="col">Owner</th>
+                                            <th scope="col">Date Created</th>
+                                            <th scope="col">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for rent in rents %}
+                                        <tr>
+                                            <td>{{ rent.name }}</td>
+                                            <td>{{ rent.phone }}</td>
+                                            <td>{{ rent.email }}</td>
+                                            <td>{{ rent.property_type }}</td>
+                                            <td>{{ rent.location }}</td>
+                                            <td>{{ rent.rent_rate }}</td>
+                                            <td>{{ rent.due_date }}</td>
+                                            <td>{{ rent.gender }}</td>
+                                            <td>{{ rent.owner }}</td>
+                                            <td>{{ rent.created_at }}</td>
+                                            <td>Actions</td>
+
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </p>
+                    </div>
+                </div>
+                {% else %}
+                    <h5 class="alert alert-primary ms-5 me-4">No Tenant Records Found</h5>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Records Modal -->
+    <div class="modal" tabindex="-1" id="myModal" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modal-title">Add Tenant's Record</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {% if success %}
+                <div class="alert alert-success alert-dismissible fade show d-none">Tenant Added Successfully!</div>
+                {% else %}
+                   <form action="{% url 'add_rent' %}" method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="form-group mt-5">
+                            <input type="submit" value="Submit" class="btn btn-primary" />
+                        </div>
+                  </form>
+                {% endif %}
+              
+            </div>
+            <div class="modal-footer">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+{% endblock %}
