@@ -21,6 +21,7 @@ urlpatterns = [
     path('financials/', views.financials, name='financials'),
     path('add_income/', views.add_income, name='add_income'),
     path('add_expense/', views.add_expense, name='add_expense'),
+    path('clyentel/', views.builder, name='builder'),
 
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

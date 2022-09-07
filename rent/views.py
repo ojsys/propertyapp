@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from rent.models import Rent, PropertyInfo, Income, Expenses
@@ -167,4 +167,9 @@ def add_expense(request):
             return render(request, 'add_expense.html', {'form2': ExpenseForm(), 'success': True})
     else:
         form = ExpenseForm()
-    return render(request, 'add_expense.html', {'expense': expense})
+    return render(request, 'add_expense.html', {'expense': form})
+
+
+
+def builder(request):
+    return redirect(request, 'www.clyentel.com')
