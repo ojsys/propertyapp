@@ -70,6 +70,33 @@ def add_rent(request):
     return render(request, 'add_rent.html', {'form': form})
 
 
+# Function to Edit Rent form
+@login_required(login_url='login')
+def update_rent(request, rent_id):
+    rent_id = int(rent_id)
+    try:
+        rent_unit = Rent.objects.get(id=rent_id)
+    except Rent.DoesNotExist:
+        return redirect('backend')
+    rent_form = RentForm(request.POST or None, instance=rent_unit)
+    if rent_form.is_valid():
+        rent_form.save()
+        return redirect('backend')
+    return render(request, 'update.html', {'update_form': rent_form}) 
+
+# Function to Delete rent
+@login_required(login_url='login')
+def delete_rent(request, rent_id):
+    rent_id = int(rent_id)
+    try:
+        rent_unit = Rent.objects.get(id=rent_id)
+    except Rent.DoesNotExist:
+        return redirect('backend')
+    rent_unit.delete()
+    return redirect('backend')
+
+
+
 @login_required(login_url='login')
 def property_info_roll(request):
     return render(request, 'property_info_roll.html', {
