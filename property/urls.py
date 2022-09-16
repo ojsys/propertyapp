@@ -21,8 +21,9 @@ urlpatterns = [
     path('financials/', views.financials, name='financials'),
     path('add_income/', views.add_income, name='add_income'),
     path('add_expense/', views.add_expense, name='add_expense'),
-    path('update_rent/', views.update_rent, name='update_rent'),
-    path('delete_rent/', views.delete_rent, name='delete_rent'),
+    path('<int:rent_id>/', views.detail_rent, name='detail_rent'),
+    path('<int:rent_id>/update/', views.update_rent, name='update_rent'),
+    path('<int:rent_id>/delete/', views.delete_rent, name='delete_rent'),
     path('clyentel/', views.builder, name='builder'),
 
     

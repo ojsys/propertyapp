@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block mainpanel %}
+<div class="row">
+    <div class="col-md-6">
+        <ul class="list-group">
+            <li class="list-group-item fs-5">Name: &nbsp;&nbsp; <strong>{{ rent_detail.name }}</strong></li>
+            <li class="list-group-item fs-5">Phone: &nbsp;&nbsp; <strong>{{ rent_detail.phone }}</strong></li>
+            <li class="list-group-item fs-5">Email: &nbsp;&nbsp;<strong>{{ rent_detail.email }}</strong></li>
+            <li class="list-group-item fs-5">Property: &nbsp;&nbsp;<strong>{{ rent_detail.property_type }}</strong></li>
+            <li class="list-group-item fs-5">Location: &nbsp;&nbsp;<strong>{{ rent_detail.location }}</strong></li>
+            <li class="list-group-item fs-5">Rate: &nbsp;&nbsp;<strong>{{ rent_detail.rent_rate }}</strong></li>
+            <li class="list-group-item fs-5">Due Date: &nbsp;&nbsp;<strong>{{ rent_detail.due_date }}</strong></li>
+            <li class="list-group-item fs-5">Gender: &nbsp;&nbsp;<strong>{{ rent_detail.gender }}</strong></li>
+            <li class="list-group-item fs-5">Property Owner: &nbsp;&nbsp; <strong>{{ rent_detail.owner }}</strong></li>
+          </ul>
+    </div>
+    <div class="col-md-6">
+        
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <a href="{% url 'update_rent' rent_detail.id %}" class="btn btn-primary" id="{{rent_detail.id}}">Update</a>
+            <a href="{% url 'delete_rent' rent_detail.id %}" class="btn btn-danger" id="{{rent_detail.id}}">Delete</a>
+          </div>
+    </div>
+</div>
+
+
+
+{% endblock mainpanel %}

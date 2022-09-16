@@ -1,21 +1,24 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
 
 {% block mainpanel %}
 
 <center>
     <h2 class="mb-5">Update Details</h2>
-    <form method="post" action="" enctype="multipart/form-data">
-        {% csrf_token %}
-        <table class="w-50 table table-light" style="border-radius: 10px;">
-            {% for field in rent_form %}
-            <tr>
-                <th>{{ field.label }}</th>
-                <td>{{ field }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        <button type="submit" class="btn btn-lg btn-success">Update</button>
-    </form>
+    
+    <div class="main">
+        <!-- Create a Form -->
+        <form method="POST">
+            <!-- Security token by Django -->
+            {% csrf_token %}
+    
+            <!-- form as paragraph -->
+            {{ form.as_p }}
+    
+            <input type="submit" value="Update">
+        </form>
+    
+    </div>
 </center>
         
 {% endblock mainpanel %}

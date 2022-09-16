@@ -35,7 +35,7 @@
                                     <tbody>
                                         {% for rent in rents %}
                                         <tr>
-                                            <td>{{ rent.name }}</td>
+                                            <td><a style="text-decoration: none;" href="{% url 'detail_rent' rent.id %}">{{ rent.name }}</a></td>
                                             <td>{{ rent.phone }}</td>
                                             <td>{{ rent.email }}</td>
                                             <td>{{ rent.property_type }}</td>
@@ -46,8 +46,8 @@
                                             <td>{{ rent.owner }}</td>
                                             <td>{{ rent.created_at }}</td>
                                             <td>
-                                                <a href="{% url 'update_rent' %}" class="btn btn-primary" style="color: white;">Update</a>
-                                                <a href="{% url 'delete_rent' %}" class="btn btn-danger">Delete</a>
+                                                <a href="{% url 'update_rent' rent.id %}" class="btn btn-primary" id="{{rent.id}}">Update</a>
+                                                <a href="{% url 'delete_rent' rent.id %}" class="btn btn-danger" id="{{rent.id}}">Delete</a>        
                                             </td>
 
                                         </tr>

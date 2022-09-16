@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect, redirect
+from django.shortcuts import render, HttpResponseRedirect, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from rent.models import Rent, PropertyInfo, Income, Expenses
@@ -70,19 +70,20 @@ def add_rent(request):
     return render(request, 'add_rent.html', {'form': form})
 
 
+@login_required(login_url='login')
+def detail_rent(request, rent_id):
+    rent_detail = get_object_or_404(Rent, pk=rent_id)
+    return render(request, 'detail_rent.html', {'rent_detail':rent_detail})
+
 # Function to Edit Rent form
 @login_required(login_url='login')
 def update_rent(request, rent_id):
-    rent_id = int(rent_id)
-    try:
-        rent_unit = Rent.objects.get(id=rent_id)
-    except Rent.DoesNotExist:
-        return redirect('backend')
+    rent_unit = get_object_or_404(Rent, pk=rent_id)
     rent_form = RentForm(request.POST or None, instance=rent_unit)
     if rent_form.is_valid():
         rent_form.save()
         return redirect('backend')
-    return render(request, 'update.html', {'update_form': rent_form}) 
+    return render(request, 'update.html', {'form': rent_form}) 
 
 # Function to Delete rent
 @login_required(login_url='login')
