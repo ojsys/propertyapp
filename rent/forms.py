@@ -16,7 +16,7 @@ class RentForm(forms.ModelForm):
             ("Owner 4", "Owner 4"),
         )
         model = Rent
-        fields = ['name', 'phone', 'email', 'property_type', 'location', 'rent_rate', 'due_date', 'gender', 'owner']
+        fields = ['name', 'phone', 'email', 'property_type', 'location', 'rent_rate', 'due_date', 'gender', 'owner', 'file']
         labels = {
             'name': 'Name',
             'phone': 'Phone',
@@ -26,7 +26,8 @@ class RentForm(forms.ModelForm):
             'rent_rate': 'Rent Rate',
             'due_date': 'Due Date',
             'gender': 'Gender',
-            'owner': 'Owner'
+            'owner': 'Owner',
+            'file':'File',
         }
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -38,6 +39,7 @@ class RentForm(forms.ModelForm):
             'due_date': forms.DateInput(attrs={'class': 'form-control'}),
             'gender': forms.Select(attrs={'class': 'form-control'}),
             'owner': forms.Select(attrs={'class': 'form-control'}),
+            'file': forms.FileInput(attrs={'class': 'form-control', 'multiple': 'true'}),
         }
     
 

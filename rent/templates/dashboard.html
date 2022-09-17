@@ -65,8 +65,8 @@
                                       <td>{{ rent.owner }}</td>
                                       <td>{{ rent.created_at }}</td>
                                       <td>
-                                        <a href="{% url 'update_rent' rent.id %}" class="btn btn-primary" id="{{rent.id}}">Update</a>
-                                        <a href="{% url 'delete_rent' rent.id %}" class="btn btn-danger" id="{{rent.id}}">Delete</a>
+                                        <a href="{% url 'update_rent' rent.id %}" class="btn btn-primary p-3" style="color: white;" id="{{rent.id}}">Update</a>
+                                        <a href="{% url 'delete_rent' rent.id %}" class="btn btn-danger p-3" style="color: white;" id="{{rent.id}}">Delete</a>
                                       </td>
                                       
                                     </tr>

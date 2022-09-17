@@ -46,8 +46,8 @@
                                             <td>{{ rent.owner }}</td>
                                             <td>{{ rent.created_at }}</td>
                                             <td>
-                                                <a href="{% url 'update_rent' rent.id %}" class="btn btn-primary" id="{{rent.id}}">Update</a>
-                                                <a href="{% url 'delete_rent' rent.id %}" class="btn btn-danger" id="{{rent.id}}">Delete</a>        
+                                                <a href="{% url 'update_rent' rent.id %}" style="color: white;" class="btn btn-primary" id="{{rent.id}}">Update</a>
+                                                <a href="{% url 'delete_rent' rent.id %}" style="color: white;" class="btn btn-danger" id="{{rent.id}}">Delete</a>        
                                             </td>
 
                                         </tr>
@@ -77,9 +77,10 @@
                 {% if success %}
                 <div class="alert alert-success alert-dismissible fade show d-none">Tenant Added Successfully!</div>
                 {% else %}
-                   <form action="{% url 'add_rent' %}" method="POST">
+                   <form action="{% url 'add_rent' %}" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form.as_p }}
+                        
                         <div class="form-group mt-5">
                             <input type="submit" value="Submit" class="btn btn-primary" />
                         </div>

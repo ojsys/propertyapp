@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from rent.models import Rent, PropertyInfo, Income, Expenses
 from .forms import RentForm, PropertyInfoForm, IncomeForm, ExpenseForm
 from django.db.models import Sum
+from django.core.files.storage import FileSystemStorage
+
 
 # View for displaying backent
 @login_required(login_url='login')
@@ -37,8 +39,7 @@ def rent_roll(request):
 @login_required(login_url="login")
 def add_rent(request):
     if request.method == "POST":
-        form = RentForm(request.POST)
-        # Check if form is valid
+                # Check if form is valid
         if form.is_valid():
             name = form.cleaned_data["name"]
             phone = form.cleaned_data["phone"]
@@ -63,17 +64,25 @@ def add_rent(request):
                 owner=owner,
             )
             new_rent.save()
-            return render(request, 'add_rent.html', {'form':RentForm(), 'success':True})
+            return render(request, 'add_rent.html', {
+                'form':RentForm(),
+                 'success':True,
+                 
+                 })
 
     else:
         form = RentForm()
-    return render(request, 'add_rent.html', {'form': form})
+    return render(request, 'add_rent.html', {'form': form,})
 
 
 @login_required(login_url='login')
 def detail_rent(request, rent_id):
+    upload = request.FILES['upload']
+    fss = FileSystemStorage()
+    file = fss.save(upload.name, upload)
+    file_url = fss.url(file)
     rent_detail = get_object_or_404(Rent, pk=rent_id)
-    return render(request, 'detail_rent.html', {'rent_detail':rent_detail})
+    return render(request, 'detail_rent.html', {'rent_detail':rent_detail, 'file_url':file_url})
 
 # Function to Edit Rent form
 @login_required(login_url='login')
@@ -83,7 +92,7 @@ def update_rent(request, rent_id):
     if rent_form.is_valid():
         rent_form.save()
         return redirect('backend')
-    return render(request, 'update.html', {'form': rent_form}) 
+    return render(request, 'update_detail.html', {'form': rent_form}) 
 
 # Function to Delete rent
 @login_required(login_url='login')
