@@ -41,7 +41,7 @@ def add_rent(request):
     if request.method == "POST":
 
         form = RentForm(request.POST, request.FILES)
-        files = RentForm.FILES.getlist('files')
+        files = request.FILES.getlist('files')
                 # Check if form is valid
         if form.is_valid():
             name = form.cleaned_data["name"]
@@ -208,8 +208,50 @@ def add_expense(request):
         form = ExpenseForm()
     return render(request, 'add_expense.html', {'expense': form})
 
+# Function to Update Income Details
+@login_required(login_url='login')
+def update_income(request, income_id):
+    income_unit = get_object_or_404(Income, pk=income_id)
+    income_form = IncomeForm(request.POST or None, instance=income_unit)
+    if income_form.is_valid():
+        income_form.save()
+        return redirect('backend')
+    return render(request, 'update_income.html', {'form': income_form})
+
+# Function to Delete an income detail
+@login_required(login_url='login')
+def delete_income(request, income_id):
+    income_id = int(income_id)
+    try:
+        income_unit = Income.objects.get(id=income_id)
+    except Income.DoesNotExist:
+        return redirect('backend')
+    income_unit.delete()
+    return redirect('backend')
 
 
+# Function to Update Expense Details
+@login_required(login_url='login')
+def update_expense(request, expense_id):
+    expense_unit = get_object_or_404(Expenses, pk=expense_id)
+    expense_form = ExpenseForm(request.POST or None, instance=expense_unit)
+    if expense_form.is_valid():
+        expense_form.save()
+        return redirect('backend')
+    return render(request, 'update_expense.html', {'form': expense_form})
+
+# Function to Delete an Expense detail
+@login_required(login_url='login')
+def delete_expense(request, expense_id):
+    expense_id = int(expense_id)
+    try:
+        expense_unit = Expenses.objects.get(id=expense_id)
+    except Expenses.DoesNotExist:
+        return redirect('backend')
+    expense_unit.delete()
+    return redirect('backend')
+
+# Function for filtering by ownership of property
 def owner_one(request):
     rents1 = Rent.objects.all().filter(owner='Owner 1')
     return render(request, 'owner1.html', {'rents1':rents1})

@@ -4,7 +4,7 @@
 {% block mainpanel %}
 <div class="container">
     <div class="row">
-        <a href="" class="btn btn-primary btn-xl mb-5" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fas fa-user-plus fa-lg"></i>&nbsp;&nbsp; Add Income</a>
+        <a href="" style="display: block; width: 30%;" class="btn btn-primary btn-xl mb-5" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fas fa-user-plus fa-lg"></i>&nbsp;&nbsp; Add Income</a>
         <!-- Income section -->
         <div class="col-md-12">
             {% if incomes %}
@@ -22,7 +22,9 @@
                                         <th scope="col">Tenant's Name</th>
                                         <th scope="col">Payment Description</th>
                                         <th scope="col">Payment Amount</th>
-                                        <th scope="col">Actions</th>
+                                        <th scope="col">
+                                            Actions
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -32,7 +34,10 @@
                                         <td>{{ income.tenant }}</td>
                                         <td>{{ income.payment_desc }}</td>
                                         <td>{{ income.payment_amount }}</td>
-                                        <td>Actions</td>
+                                        <td>
+                                            <a href="{% url 'update_income' income.id %}" class="btn btn-primary p-3" style="color: white;" id="{{income.id}}">Update</a>
+                                            <a href="{% url 'delete_income' income.id %}" class="btn btn-danger p-3" style="color: white;" id="{{income.id}}">Delete</a>
+                                        </td>
 
                                     </tr>
                                     {% endfor %}
@@ -47,7 +52,7 @@
             {% endif %}
         </div>
 
-        <a href="" class="btn btn-primary btn-xl mb-1 mt-5" data-bs-toggle="modal" data-bs-target="#myModal2"><i class="fas fa-user-plus fa-lg"></i>&nbsp;&nbsp; Add Expense</a>
+        <a href="" style="display: block; width: 30%;" class="btn btn-primary btn-xl mb-1 mt-5" data-bs-toggle="modal" data-bs-target="#myModal2"><i class="fas fa-user-plus fa-lg"></i>&nbsp;&nbsp; Add Expense</a>
         <!-- Expenses Section -->
         <div class="col-md-12 mt-5">
             {% if expenses %}
@@ -77,7 +82,10 @@
                                         <td>{{ expense.paid_to }}</td>
                                         <td>{{ expense.payment_desc }}</td>
                                         <td>{{ expense.payment_amount }}</td>
-                                        <td>Actions</td>
+                                        <td>
+                                            <a href="{% url 'update_expense' expense.id %}" class="btn btn-primary p-3" style="color: white;" id="{{expense.id}}">Update</a>
+                                            <a href="{% url 'delete_expense' expense.id %}" class="btn btn-danger p-3" style="color: white;" id="{{expense.id}}">Delete</a>
+                                        </td>
 
                                     </tr>
                                     {% endfor %}
