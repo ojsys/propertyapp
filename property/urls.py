@@ -24,7 +24,10 @@ urlpatterns = [
     path('<int:rent_id>/', views.detail_rent, name='detail_rent'),
     path('<int:rent_id>/update/', views.update_rent, name='update_rent'),
     path('<int:rent_id>/delete/', views.delete_rent, name='delete_rent'),
-    path('clyentel/', views.builder, name='builder'),
+    path('owner1/', views.owner_one, name='owner1'),
+    path('owner2/', views.owner_two, name='owner2'),
+    path('owner3/', views.owner_three, name='owner3'),
+    path('owner4/', views.owner_four, name='owner4'),
 
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

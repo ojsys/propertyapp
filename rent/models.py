@@ -25,11 +25,11 @@ class Rent(models.Model):
     gender = models.CharField(max_length=100, null=True, choices=GENDER)
     owner = models.CharField(max_length=100, null=True, choices=OWNER)
     created_at = models.DateTimeField(auto_now_add=True)
-    file = models.FileField(upload_to='media/', default=None, null=True, blank=True)
+    files = models.FileField(upload_to='media/', default=None, null=True, blank=True)
 
 
     def __str__(self):
-        return self.name
+        return f'{self.name}'
 
 
 

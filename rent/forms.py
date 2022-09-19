@@ -16,7 +16,7 @@ class RentForm(forms.ModelForm):
             ("Owner 4", "Owner 4"),
         )
         model = Rent
-        fields = ['name', 'phone', 'email', 'property_type', 'location', 'rent_rate', 'due_date', 'gender', 'owner', 'file']
+        fields = ['name', 'phone', 'email', 'property_type', 'location', 'rent_rate', 'due_date', 'gender', 'owner', 'files']
         labels = {
             'name': 'Name',
             'phone': 'Phone',
@@ -27,7 +27,7 @@ class RentForm(forms.ModelForm):
             'due_date': 'Due Date',
             'gender': 'Gender',
             'owner': 'Owner',
-            'file':'File',
+            'files':'Files',
         }
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
@@ -39,7 +39,7 @@ class RentForm(forms.ModelForm):
             'due_date': forms.DateInput(attrs={'class': 'form-control'}),
             'gender': forms.Select(attrs={'class': 'form-control'}),
             'owner': forms.Select(attrs={'class': 'form-control'}),
-            'file': forms.FileInput(attrs={'class': 'form-control', 'multiple': 'true'}),
+            'files': forms.ClearableFileInput(attrs={'class': 'form-control', 'multiple': 'True'}),
         }
     
 
@@ -68,7 +68,7 @@ class PropertyInfoForm(forms.ModelForm):
             'property_location': forms.TextInput(attrs={'class': 'form-control'}),
             'property_description': forms.Textarea(attrs={'class': 'form-control'}),
             'property_owner': forms.Select(attrs={'class': 'form-control'}),
-            'property_images': forms.ClearableFileInput(attrs={'class': 'form-control', 'multiple':True}),
+            'property_images': forms.ClearableFileInput(attrs={'class': 'form-control', 'multiple':'True'}),
         }
 
 

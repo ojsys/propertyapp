@@ -39,6 +39,9 @@ def rent_roll(request):
 @login_required(login_url="login")
 def add_rent(request):
     if request.method == "POST":
+
+        form = RentForm(request.POST, request.FILES)
+        files = RentForm.FILES.getlist('files')
                 # Check if form is valid
         if form.is_valid():
             name = form.cleaned_data["name"]
@@ -50,6 +53,7 @@ def add_rent(request):
             due_date = form.cleaned_data["due_date"]
             gender = form.cleaned_data["gender"]
             owner = form.cleaned_data["owner"]
+            files = form.cleaned_data["files"]
 
             # New Rent Record
             new_rent = Rent(
@@ -62,6 +66,7 @@ def add_rent(request):
                 due_date=due_date,
                 gender=gender,
                 owner=owner,
+                files=files,
             )
             new_rent.save()
             return render(request, 'add_rent.html', {
@@ -72,17 +77,14 @@ def add_rent(request):
 
     else:
         form = RentForm()
-    return render(request, 'add_rent.html', {'form': form,})
+    return render(request, 'add_rent.html', {'form': form})
 
 
 @login_required(login_url='login')
 def detail_rent(request, rent_id):
-    upload = request.FILES['upload']
-    fss = FileSystemStorage()
-    file = fss.save(upload.name, upload)
-    file_url = fss.url(file)
+    rent_data = Rent.objects.all()
     rent_detail = get_object_or_404(Rent, pk=rent_id)
-    return render(request, 'detail_rent.html', {'rent_detail':rent_detail, 'file_url':file_url})
+    return render(request, 'detail_rent.html', {'rent_detail':rent_detail, 'rent_data':rent_data})
 
 # Function to Edit Rent form
 @login_required(login_url='login')
@@ -208,5 +210,19 @@ def add_expense(request):
 
 
 
-def builder(request):
-    return redirect(request, 'www.clyentel.com')
+def owner_one(request):
+    rents1 = Rent.objects.all().filter(owner='Owner 1')
+    return render(request, 'owner1.html', {'rents1':rents1})
+
+def owner_two(request):
+    rents2 = Rent.objects.all().filter(owner='Owner 2')
+    return render(request, 'owner2.html', {'rents2': rents2})
+
+def owner_three(request):
+    rents3 = Rent.objects.all().filter(owner='Owner 3')
+    return render(request, 'owner3.html', {'rents3': rents3})
+
+def owner_four(request):
+    rents4 = Rent.objects.all().filter(owner='Owner 4')
+    data4 = Rent.objects.all()
+    return render(request, 'owner4.html', {'rents4':rents4, 'data4':data4})

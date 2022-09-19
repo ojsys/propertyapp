@@ -16,11 +16,22 @@
           </ul>
     </div>
     <div class="col-md-6">
-        
-        <div class="d-grid gap-2 col-6 mx-auto">
-            <a href="{% url 'update_rent' rent_detail.id %}" class="btn btn-primary" id="{{rent_detail.id}}">Update</a>
-            <a href="{% url 'delete_rent' rent_detail.id %}" class="btn btn-danger" id="{{rent_detail.id}}">Delete</a>
-          </div>
+        <div class="card">
+            <div class="card-body">
+                <ul class="list-group mb-5">
+                    
+                    <li class="list-group-item">Uploaded Files: &nbsp;&nbsp;<br>
+                        <a href="">{{rent_detail.files}}</a>
+                    </li>
+                    
+                </ul>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <a href="{% url 'update_rent' rent_detail.id %}" class="btn btn-primary" id="{{rent_detail.id}}">Update</a>
+                    <a href="{% url 'delete_rent' rent_detail.id %}" class="btn btn-danger" id="{{rent_detail.id}}">Delete</a>
+                </div>
+            </div>
+        </div>        
+
     </div>
 </div>
 

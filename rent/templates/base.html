@@ -51,18 +51,29 @@
       <div class="navbar-menu-wrapper d-flex align-items-top"> 
         <ul class="navbar-nav">
           <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-            <h1 class="welcome-text">Welcome, <span class="text-black fw-bold">{{ name }}</span></h1>
+            <h1 class="welcome-text">Veritas Property Manager Pro 
+              <span class="text-black fw-bold">
+                
+              </span>
+            </h1>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
           
           <li class="nav-item d-none d-lg-block">
-            <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
-              <span class="input-group-addon input-group-prepend border-right">
-                <span class="icon-calendar input-group-text calendar-icon"></span>
-              </span>
-              <input type="text" class="form-control">
-            </div>
+           
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Select Owner
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'owner1' %}">Owner1</a></li>
+                  <li><a class="dropdown-item" href="{% url 'owner2' %}">Owner2</a></li>
+                  <li><a class="dropdown-item" href="{% url 'owner3' %}">Owner3</a></li>
+                  <li><a class="dropdown-item" href="{% url 'owner4' %}">Owner4</a></li>
+                  
+                </ul>
+              </div>
           </li>
           <li class="nav-item">
             <form class="search-form" action="#">
@@ -141,7 +152,7 @@
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © {% now 'Y' %}. All rights reserved. Designed with <i class="fa fa-heart">&nbsp;</i>by  <a href="{% url 'builder' %}">Clyentel</a></span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © {% now 'Y' %}. All rights reserved. Designed with <i class="fa fa-heart">&nbsp;</i>by  <a href="www.clyentel.com/">Clyentel</a></span>
           </div>
         </footer>
         <!-- partial -->
