@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Rent, PropertyInfo, Income, Expenses
+from .models import Rent, PropertyInfo, Income, Expenses, Owner
 
 class RentAdmin(admin.ModelAdmin):
     list_display = ['name', 'phone', 'email', 'gender', 'location', 'created_at', ]
@@ -24,7 +24,7 @@ class ExpensesAdmin(admin.ModelAdmin):
     search_fields = ['payment_date', 'payment_method', 'paid_to', 'payment_desc', 'payment_amount',]
     list_per_page: 10
 
-
+admin.site.register(Owner)
 admin.site.register(Rent, RentAdmin)
 admin.site.register(PropertyInfo, PropertyAdmin)
 admin.site.register(Income, IncomeAdmin)

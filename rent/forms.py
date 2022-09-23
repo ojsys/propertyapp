@@ -1,6 +1,27 @@
 from django import forms
-from .models import Rent, PropertyInfo, Income, Expenses
+from .models import Rent, PropertyInfo, Income, Expenses, Owner
 
+
+
+class Owner(forms.ModelForm):
+    class Meta:
+        model = Owner
+        fields = ['firstname', 'middlename', 'lastname', 'email', 'phone']
+        labels = {
+            'firstname': 'First Name',
+            'middlename': 'Middle Name',
+            'lastname': 'Last Name',
+            'email': 'Email Address',
+            'phone': 'Phone Number',
+        }
+
+        widgets = {
+            'firstname': forms.TextInput(attrs={'class': 'form-control'}),
+            'middlename': forms.TextInput(attrs={'class': 'form-control'}),
+            'lastname': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.NumberInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+        }
 
 
 class RentForm(forms.ModelForm):
