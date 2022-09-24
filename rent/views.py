@@ -13,7 +13,7 @@ def backend(request):
     owners = Owner.objects.all()
     for owner in owners:
         get_owner = owner.id
-    rents_filter = Rent.objects.all().filter(owner=get_owner)
+        rents_filter = Rent.objects.all().filter(owner=get_owner)
     current_user = request.user
     name = current_user.first_name
     user_email = current_user.email
@@ -38,7 +38,7 @@ def rent_roll(request):
     owners = Owner.objects.all()
     for owner in owners:
         get_owner = owner.id
-    rents_filter = Rent.objects.all().filter(owner=get_owner)
+        rents_filter = Rent.objects.all().filter(owner=get_owner)
     return render(request, 'rent_roll.html', {
         'form': RentForm,
         'rents': Rent.objects.all(),
@@ -171,7 +171,7 @@ def financials(request):
     owners = Owner.objects.all()
     for owner in owners:
         get_owner = owner.id
-    rents_filter = Rent.objects.all().filter(owner=get_owner)
+        rents_filter = Rent.objects.all().filter(owner=get_owner)
     return render(request, 'financials.html', {
         'form': IncomeForm,
         'form2': ExpenseForm,
