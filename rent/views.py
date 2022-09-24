@@ -12,8 +12,7 @@ from django.core.files.storage import FileSystemStorage
 def backend(request):
     owners = Owner.objects.all()
     for owner in owners:
-        get_owner = owner.id
-        rents_filter = Rent.objects.all().filter(owner=get_owner)
+        rents_filter = Rent.objects.all().filter(owner=owner.id)
     current_user = request.user
     name = current_user.first_name
     user_email = current_user.email
@@ -37,8 +36,7 @@ def backend(request):
 def rent_roll(request):
     owners = Owner.objects.all()
     for owner in owners:
-        get_owner = owner.id
-        rents_filter = Rent.objects.all().filter(owner=get_owner)
+        rents_filter = Rent.objects.all().filter(owner=owner.id)
     return render(request, 'rent_roll.html', {
         'form': RentForm,
         'rents': Rent.objects.all(),
@@ -94,19 +92,25 @@ def add_rent(request):
 
 @login_required(login_url='login')
 def detail_rent(request, rent_id):
+    owners = Owner.objects.all()
+    for owner in owners:
+        rents_filter = Rent.objects.all().filter(owner=owner.id)
     rent_data = Rent.objects.all()
     rent_detail = get_object_or_404(Rent, pk=rent_id)
-    return render(request, 'detail_rent.html', {'rent_detail':rent_detail, 'rent_data':rent_data})
+    return render(request, 'detail_rent.html', {'rents_filter': rents_filter, 'rent_detail':rent_detail, 'rent_data':rent_data})
 
 # Function to Edit Rent form
 @login_required(login_url='login')
 def update_rent(request, rent_id):
+    owners = Owner.objects.all()
+    for owner in owners:
+        rents_filter = Rent.objects.all().filter(owner=owner.id)
     rent_unit = get_object_or_404(Rent, pk=rent_id)
     rent_form = RentForm(request.POST or None, instance=rent_unit)
     if rent_form.is_valid():
         rent_form.save()
         return redirect('backend')
-    return render(request, 'update_detail.html', {'form': rent_form}) 
+    return render(request, 'update_detail.html', {'form': rent_form, 'rents_filter': rents_filter}) 
 
 # Function to Delete rent
 @login_required(login_url='login')
@@ -125,8 +129,7 @@ def delete_rent(request, rent_id):
 def property_info_roll(request):
     owners = Owner.objects.all()
     for owner in owners:
-        get_owner = owner.id
-    rents_filter = Rent.objects.all().filter(owner=get_owner)
+        rents_filter = Rent.objects.all().filter(owner=owner.id)
     return render(request, 'property_info_roll.html', {
         'form': PropertyInfoForm,
         'property_info': PropertyInfo.objects.all(),
@@ -170,8 +173,7 @@ def property_info(request):
 def financials(request):
     owners = Owner.objects.all()
     for owner in owners:
-        get_owner = owner.id
-        rents_filter = Rent.objects.all().filter(owner=get_owner)
+        rents_filter = Rent.objects.all().filter(owner=owner.id)
     return render(request, 'financials.html', {
         'form': IncomeForm,
         'form2': ExpenseForm,
