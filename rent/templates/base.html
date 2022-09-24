@@ -61,19 +61,17 @@
         <ul class="navbar-nav ms-auto">
           
           <li class="nav-item d-none d-lg-block">
-           
-              <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Select Owner
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{% url 'owner1' %}">Owner1</a></li>
-                  <li><a class="dropdown-item" href="{% url 'owner2' %}">Owner2</a></li>
-                  <li><a class="dropdown-item" href="{% url 'owner3' %}">Owner3</a></li>
-                  <li><a class="dropdown-item" href="{% url 'owner4' %}">Owner4</a></li>
-                  
-                </ul>
-              </div>
+            <div class="d-sm-flex justify-content-between align-items-start"><div class="dropdown">
+              <button style="width: 200px; padding: 15px 20px;" class="btn btn-primary btn-lg dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Select Owner
+              </button>
+              <ul class="dropdown-menu">
+                {% for owner in owners %}
+                <li><a class="dropdown-item" href="{% url 'owner' owner.id %}">{{ owner.name }} </a></li>
+                {% endfor %}
+              </ul>
+            </div>
+              
           </li>
           <li class="nav-item">
             <form class="search-form" action="#">
@@ -91,7 +89,7 @@
                 <img class="img-md rounded-circle" src="{% static 'images/faces/face8.jpg' %}" alt="Profile image">
                 <p class="fw-light text-muted mb-0">{{user_email}}</p>
               </div>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
+              
               <a href="{% url 'logout' %}" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
             </div>
           </li>

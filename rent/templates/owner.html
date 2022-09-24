@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block mainpanel %}
+
 <div class="row">
     <div class="col-lg-12 d-flex flex-column">
       <div class="row flex-grow">
@@ -10,7 +11,7 @@
               <div class="d-sm-flex justify-content-between align-items-start">
                 <div>
                  <h4 class="card-title card-title-dash">Rent Roll</h4>
-                 <h5 class="card-subtitle card-subtitle-dash">List of our latest Tenants</h5>
+                 <h5 class="card-subtitle card-subtitle-dash">List of Tenants</h5>
                 </div>
               </div>
               <p class="card-text">
@@ -31,8 +32,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for rent in rents2 %}
-                                
+
+                          
+                            {% for rent in rents %}
+                              {% if rents %}
                                 <tr>
                                   
                                   <td><a style="text-decoration: none;" href="{% url 'detail_rent' rent.id %}">{{ rent.name }}</a></td>
@@ -47,9 +50,13 @@
                                   
                                   
                                 </tr>
-                                
+                                {% else %}
+                                <h4>No Onwer Record Found. Please select a valid owner!</h4>
+                              {% endif %}
                               
                             {% endfor %}
+                          
+                            
                         </tbody>
                     </table>
                 </div>

@@ -28,11 +28,8 @@ urlpatterns = [
     path('<int:income_id>/delete_income/', views.delete_income, name='delete_income'),
     path('<int:expense_id>/update_expense/', views.update_expense, name='update_expense'),
     path('<int:expense_id>/delete_expense/', views.delete_expense, name='delete_expense'),
-    path('owner1/', views.owner_one, name='owner1'),
-    path('owner2/', views.owner_two, name='owner2'),
-    path('owner3/', views.owner_three, name='owner3'),
-    path('owner4/', views.owner_four, name='owner4'),
-
+    path('<int:owner_id>/owner/', views.owner_view, name='owner'),
+    
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

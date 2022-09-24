@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from rent.models import Rent, PropertyInfo, Income, Expenses
+from rent.models import Rent, PropertyInfo, Income, Expenses, Owner
 from .forms import RentForm, PropertyInfoForm, IncomeForm, ExpenseForm
 from django.db.models import Sum
 from django.core.files.storage import FileSystemStorage
@@ -10,7 +10,10 @@ from django.core.files.storage import FileSystemStorage
 # View for displaying backent
 @login_required(login_url='login')
 def backend(request):
-    
+    owners = Owner.objects.all()
+    for owner in owners:
+        get_owner = owner.id
+    rents_filter = Rent.objects.all().filter(owner=get_owner)
     current_user = request.user
     name = current_user.first_name
     user_email = current_user.email
@@ -18,20 +21,29 @@ def backend(request):
     data = Income.objects.all().order_by('-id')[:10]
     data2 = Expenses.objects.all().order_by('-id')[:10]
     revenue = Income.objects.all().aggregate(totalrev=Sum('payment_amount'))
+    
     context = {
         'name': name, 
         'rents': rents, 
         'data': data, 'data2': data2, 
         'revenue': revenue,
         'user_email': user_email,
+        'owners': owners,
+        'rents_filter': rents_filter,
         }
     return render(request, 'dashboard.html', context)
 
 @login_required(login_url='login')
 def rent_roll(request):
+    owners = Owner.objects.all()
+    for owner in owners:
+        get_owner = owner.id
+    rents_filter = Rent.objects.all().filter(owner=get_owner)
     return render(request, 'rent_roll.html', {
         'form': RentForm,
-        'rents': Rent.objects.all()
+        'rents': Rent.objects.all(),
+        'owners': owners,
+        'rents_filter': rents_filter,
         })
 
 
@@ -111,9 +123,15 @@ def delete_rent(request, rent_id):
 
 @login_required(login_url='login')
 def property_info_roll(request):
+    owners = Owner.objects.all()
+    for owner in owners:
+        get_owner = owner.id
+    rents_filter = Rent.objects.all().filter(owner=get_owner)
     return render(request, 'property_info_roll.html', {
         'form': PropertyInfoForm,
-        'property_info': PropertyInfo.objects.all()
+        'property_info': PropertyInfo.objects.all(),
+        'owners': owners,
+        'rents_filter': rents_filter,
         })
 
 
@@ -150,11 +168,17 @@ def property_info(request):
 
 @login_required(login_url='login')
 def financials(request):
+    owners = Owner.objects.all()
+    for owner in owners:
+        get_owner = owner.id
+    rents_filter = Rent.objects.all().filter(owner=get_owner)
     return render(request, 'financials.html', {
         'form': IncomeForm,
         'form2': ExpenseForm,
         'incomes': Income.objects.all(),
         'expenses': Expenses.objects.all(),
+        'owners': owners,
+        'rents_filter': rents_filter,
         })
 
 
@@ -252,19 +276,10 @@ def delete_expense(request, expense_id):
     return redirect('backend')
 
 # Function for filtering by ownership of property
-def owner_one(request):
-    rents1 = Rent.objects.all().filter(owner='Owner 1')
-    return render(request, 'owner1.html', {'rents1':rents1})
+def owner_view(request, owner_id):
+    get_owner = get_object_or_404(Owner, pk=owner_id)
+    owners = Owner.objects.all()
+    rents = Rent.objects.all().filter(owner=(get_owner.id))
+    
+    return render(request, 'owner.html', {'owners':owners, 'get_owner':get_owner, 'rents':rents})
 
-def owner_two(request):
-    rents2 = Rent.objects.all().filter(owner='Owner 2')
-    return render(request, 'owner2.html', {'rents2': rents2})
-
-def owner_three(request):
-    rents3 = Rent.objects.all().filter(owner='Owner 3')
-    return render(request, 'owner3.html', {'rents3': rents3})
-
-def owner_four(request):
-    rents4 = Rent.objects.all().filter(owner='Owner 4')
-    data4 = Rent.objects.all()
-    return render(request, 'owner4.html', {'rents4':rents4, 'data4':data4})

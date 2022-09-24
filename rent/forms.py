@@ -6,19 +6,15 @@ from .models import Rent, PropertyInfo, Income, Expenses, Owner
 class Owner(forms.ModelForm):
     class Meta:
         model = Owner
-        fields = ['firstname', 'middlename', 'lastname', 'email', 'phone']
+        fields = ['name', 'email', 'phone']
         labels = {
-            'firstname': 'First Name',
-            'middlename': 'Middle Name',
-            'lastname': 'Last Name',
+            'name': 'Name',
             'email': 'Email Address',
             'phone': 'Phone Number',
         }
 
         widgets = {
-            'firstname': forms.TextInput(attrs={'class': 'form-control'}),
-            'middlename': forms.TextInput(attrs={'class': 'form-control'}),
-            'lastname': forms.TextInput(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
             'phone': forms.NumberInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
         }
@@ -26,16 +22,7 @@ class Owner(forms.ModelForm):
 
 class RentForm(forms.ModelForm):
     class Meta:
-        GENDER = (
-            ("F", "F"),
-            ("M", "M"),
-        )
-        OWNER = (
-            ("Owner 1", "Owner 1"),
-            ("Owner 2", "Owner 2"),
-            ("Owner 3", "Owner 3"),
-            ("Owner 4", "Owner 4"),
-        )
+        
         model = Rent
         fields = ['name', 'phone', 'email', 'property_type', 'location', 'rent_rate', 'due_date', 'gender', 'owner', 'files']
         labels = {
@@ -67,12 +54,7 @@ class RentForm(forms.ModelForm):
 
 class PropertyInfoForm(forms.ModelForm):
     class Meta:
-        OWNER = (
-            ("Owner 1", "Owner 1"),
-            ("Owner 2", "Owner 2"),
-            ("Owner 3", "Owner 3"),
-            ("Owner 4", "Owner 4"),
-        )
+        
         model = PropertyInfo
         fields = ['property_name', 'property_type', 'property_location', 'property_description', 'property_owner', 'property_images']
         labels = {

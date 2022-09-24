@@ -104,65 +104,66 @@
         <!-- Add Income Records Modal -->
         <div class="modal" tabindex="-1" id="myModal" aria-labelledby="modal-title" aria-hidden="true">
             <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="modal-title">Add Income </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title">Add Income </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% if success %}
+                        <div class="alert alert-success alert-dismissible fade show d-none">Income Details Added Successfully!</div>
+                        {% else %}
+                        <form action="{% url 'add_income' %}" method="POST">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <div class="form-group mt-5">
+                                    <input type="submit" value="Submit" class="btn btn-primary" />
+                                </div>
+                        </form>
+                        {% endif %}
+                    
+                    </div>
+                    <div class="modal-footer">
+                    
+                    </div>
                 </div>
-                <div class="modal-body">
-                    {% if success %}
-                    <div class="alert alert-success alert-dismissible fade show d-none">Income Details Added Successfully!</div>
-                    {% else %}
-                    <form action="{% url 'add_income' %}" method="POST">
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <div class="form-group mt-5">
-                                <input type="submit" value="Submit" class="btn btn-primary" />
-                            </div>
-                    </form>
-                    {% endif %}
-                
-                </div>
-                <div class="modal-footer">
-                
-                </div>
-            </div>
-            </div>
-        </div>
             </div>
         </div>
+    
+        
 
-        <!-- Add Income Records Modal -->
+        <!-- Add Expense Records Modal -->
         <div class="modal" tabindex="-1" id="myModal2" aria-labelledby="modal-title" aria-hidden="true">
             <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="modal-title">Add Expense </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal-title">Add Expense </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            {% if success %}
+                            <div class="alert alert-success alert-dismissible fade show d-none">Expense Details Added Successfully!</div>
+                            {% else %}
+                            <form action="{% url 'add_expense' %}" method="POST">
+                                    {% csrf_token %}
+                                    {{ form2.as_p }}
+                                    <div class="form-group mt-5">
+                                        <input type="submit" value="Submit" class="btn btn-primary" />
+                                    </div>
+                            </form>
+                            {% endif %}
+                        
+                        </div>
+                        <div class="modal-footer">
+                        
+                        </div>
                 </div>
-                <div class="modal-body">
-                    {% if success %}
-                    <div class="alert alert-success alert-dismissible fade show d-none">Expense Details Added Successfully!</div>
-                    {% else %}
-                    <form action="{% url 'add_expense' %}" method="POST">
-                            {% csrf_token %}
-                            {{ form2.as_p }}
-                            <div class="form-group mt-5">
-                                <input type="submit" value="Submit" class="btn btn-primary" />
-                            </div>
-                    </form>
-                    {% endif %}
-                
-                </div>
-                <div class="modal-footer">
-                
-                </div>
-            </div>
-            </div>
-        </div>
             </div>
         </div>
+    
+        
+    </div>
 
-
+</div>
 
 {% endblock mainpanel %}
