@@ -61,15 +61,16 @@
         <ul class="navbar-nav ms-auto">
           
           <li class="nav-item d-none d-lg-block">
-            <div class="d-sm-flex justify-content-between align-items-start"><div class="dropdown">
-              <button style="width: 200px; padding: 15px 20px;" class="btn btn-primary btn-lg dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Select Owner
-              </button>
-              <ul class="dropdown-menu">
-                {% for owner in owners %}
-                <li><a class="dropdown-item" href="{% url 'owner' owner.id %}">{{ owner.name }} </a></li>
-                {% endfor %}
-              </ul>
+            <div class="d-sm-flex justify-content-between align-items-start">
+              <div class="dropdown">
+                <button style="width: 200px; padding: 15px 20px;" class="btn btn-primary btn-lg dropdown-toggle text-light" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Select Property Owner
+                </button>
+                <ul class="dropdown-menu">
+                  {% for owner in owners %}
+                  <li><a class="dropdown-item" href="{% url 'owner' owner.id %}">{{ owner.name }} </a></li>
+                  {% endfor %}
+                </ul>
             </div>
               
           </li>
