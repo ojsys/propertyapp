@@ -25544,9 +25544,9 @@ dl li {
 .table th,
 .table td {
   vertical-align: middle;
-  line-height: 1;
+  line-height: 2;
   white-space: nowrap;
-  padding: 1.125rem 1.375rem;
+  padding: 0.3rem 1.375rem;
 }
 
 .table td {
@@ -25606,11 +25606,11 @@ dl li {
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
-  line-height: 16px;
+  line-height: 10px;
   color: #8D8D8D;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  padding-left: 0;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 10px;
 }
 
 .table.select-table td .form-check {
