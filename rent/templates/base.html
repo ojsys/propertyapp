@@ -60,34 +60,34 @@
         </ul>
         <ul class="navbar-nav ms-auto">
           
-          <li class="nav-item d-none d-lg-block">
-            <div class="d-sm-flex justify-content-between align-items-end">
-              <div class="dropdown">
-                <button style="width: 200px; padding: 15px 20px;" class="btn btn-primary btn-lg dropdown-toggle text-light" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Select Property Owner
-                </button>
-                <ul class="dropdown-menu">
-                  {% for owner in owners %}
-                  <li><a class="dropdown-item" href="{% url 'owner' owner.id %}">{{ owner.name }} </a></li>
-                  {% endfor %}
-                </ul>
-            </div>
-              
-          </li>
-          <li class="nav-item">
+          
+          <!-- <li class="nav-item">
             <form class="search-form" action="#">
               <i class="icon-search"></i>
               <input type="search" class="form-control" placeholder="Search Here" title="Search here">
             </form>
-          </li>
+          </li> -->
           
+          
+          <li class="nav-item dropdown d-none d-lg-block user-dropdown">
+            <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+              <button style="width: 200px; padding: 15px 20px;" class="btn btn-primary btn-lg dropdown-toggle text-light">
+                Select Property Owner
+              </button>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">             
+              {% for owner in owners %}
+                <a class="dropdown-item" href="{% url 'owner' owner.id %}">{{ owner.name }} </a>
+              {% endfor %}
+            </div>
+          </li>
+
           
           <li class="nav-item dropdown d-none d-lg-block user-dropdown">
             <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
               <img class="img-xs rounded-circle" src="{% static 'images/faces/face8.jpg' %}" alt="Profile image"> </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <div class="dropdown-header text-center">
-                <img class="img-md rounded-circle" src="{% static 'images/faces/face8.jpg' %}" alt="Profile image">
                 <p class="fw-light text-muted mb-0">{{user_email}}</p>
               </div>
               
